@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Sweatshirts{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mb-4 text-center" style="color: #c62828;">Nos Sweatshirts</h1>
+
+    <div class="row">
+        <!-- Filtres à gauche -->
+        <div class="col-md-2 mb-4">
+            <div class="bg-light text-dark p-3 rounded">
+                <h5>Fourchette de prix</h5>
+                <form method="get" action="{{ path('product_index') }}">
+                    <select name="range" class="form-select mb-2">
+                        <option value="">-- Choisir --</option>
+                        <option value="10-29">10 à 29 €</option>
+                        <option value="30-35">30 à 35 €</option>
+                        <option value="35-50">35 à 50 €</option>
+                    </select>
+                    <button class="btn btn-outline-danger w-100">Filtrer</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Grille des produits -->
+        <div class="col-md-10">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="{{ asset(product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #C62828;">{{ product.name }}</h5>
+                                <p class="card-text"><strong>{{ product.price|number_format(2, ',', ' ') }} €</strong></p>
+
+                                <!-- Taille + ajout panier -->
+                                <div class="mb-3">
+                                    <label for="taille-{{ product.id }}" class="form-label">Choisir une taille :</label>
+                                    <select id="taille-{{ product.id }}" class="form-select">
+                                        {% for stock in product.stocks %}
+                                            {% if stock.quantity > 0 %}
+                                                <option value="{{ stock.size }}">{{ stock.size }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-primary"
+                                        onclick="location.href = '{{ path('cart_add', { id: product.id, size: 'REPLACEME' }) }}'.replace('REPLACEME', document.getElementById('taille-{{ product.id }}').value);">
+                                    Ajouter au panier
+                                </button>
+
+                                <a href="{{ path('product_show', { slug: product.slug }) }}" class="btn btn-link mt-2">Voir</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

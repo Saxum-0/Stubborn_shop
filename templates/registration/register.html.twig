@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="card mx-auto shadow-sm p-4" style="max-width: 500px; border-top: 4px solid #C62828;">
+    <h2 class="text-center mb-4" style="color: #C62828;">Créer un compte</h2>
+
+    {{ form_start(registrationForm) }}
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.plainPassword['first']) }}
+            {{ form_widget(registrationForm.plainPassword['first'], {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.plainPassword['first']) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.plainPassword['second']) }}
+            {{ form_widget(registrationForm.plainPassword['second'], {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.plainPassword['second']) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(registrationForm.name) }}
+            {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.name) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.deliveryAddress) }}
+            {{ form_widget(registrationForm.deliveryAddress, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.deliveryAddress) }}
+        </div>
+        <div class="mb-3 form-check">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+
+        <button type="submit" class="btn w-100" style="background-color: #C62828; color: white;">S'inscrire</button>
+
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

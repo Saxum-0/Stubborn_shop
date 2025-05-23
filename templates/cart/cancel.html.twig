@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement annulé - Stubborn{% endblock %}
+
+{% block body %}
+<div class="text-center mt-5">
+    <h1 class="text-danger">❌ Paiement annulé</h1>
+    <p class="mt-3">Votre commande n’a pas été finalisée.</p>
+    <a href="{{ path('cart_index') }}" class="btn btn-outline-secondary mt-4">Retour au panier</a>
+</div>
+{% endblock %}

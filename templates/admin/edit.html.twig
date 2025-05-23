@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ product.name }} - Stubborn Shop{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Modifier le produit <strong>"{{ product.name }}"</strong></h1>
+
+    <div class="card shadow-sm p-4">
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.name) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(form.price) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_row(form.image) }}
+            {% if product.image %}
+                <img src="{{ asset(product.image) }}" alt="{{ product.name }}" width="100" class="mt-2 rounded">
+            {% endif %}
+        </div>
+
+        {{ form_row(form.highlighted) }}
+
+        <h5 class="mt-4">Modifier les stocks</h5>
+        <div class="row">
+            {% for stockForm in form.stocks %}
+                <div class="col-md-6 mb-2">
+                    <div class="border p-2 rounded">
+                        <div class="mb-2">
+                            {{ form_row(stockForm.size) }}
+                        </div>
+                        <div>
+                            {{ form_row(stockForm.quantity) }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{{ path('admin_dashboard') }}" class="btn btn-outline-secondary">Retour</a>
+            <button class="btn btn-success">Enregistrer</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

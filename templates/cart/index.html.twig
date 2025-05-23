@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+
+{% block body %}
+<h2 style="color: #C62828;">Votre panier</h2>
+
+{% if items|length == 0 %}
+    <p style="color: #fff;">Votre panier est vide.</p>
+{% else %}
+    <ul class="list-group mb-4">
+        {% for item in items %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ item.product.name }} ({{ item.size }}) x {{ item.quantity }}
+                <a href="{{ path('cart_remove', { id: item.id }) }}" class="btn btn-danger btn-sm">Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h4 style="color: #FFFFFF">Total : {{ total }} €</h4>
+    <a href="{{ path('cart_checkout') }}" class="btn btn-success mt-3">Valider et payer</a>
+
+{% endif %}
+{% endblock %}

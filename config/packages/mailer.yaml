@@ -1,0 +1,4 @@
+framework:
+    mailer:
+        transports:
+            smtp: '%env(MAILER_DSN)%'

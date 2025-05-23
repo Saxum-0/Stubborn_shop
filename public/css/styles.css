@@ -1,0 +1,54 @@
+:root {
+  --main-color: #000000;
+  --accent-color: #C62828;
+  --highlight-color: #F5F5F5;
+  --light-bg: #F5F5F5;
+}
+
+body {
+  background-color: #000000;
+  color: var(--main-color);
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: var(--main-color);
+  border-color: #000000;
+}
+
+.btn-primary:hover {
+  background-color: var(--highlight-color);
+  color: var(--accent-color);
+}
+
+
+
+/* Header & Nav */
+.navbar {
+  background-color: #F5F5F5;
+  color: #C62828;
+  border-radius: 10%;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: #C62828;
+}
+.navbar .nav-link:hover {
+  color: var(--main-color);
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--highlight-color);
+}
+.btn-accent:hover {
+  background-color: 	#C62828;
+  border-color: 	#fff;
+}
+
+/* Badges */
+.badge-success {
+  background-color: var(--highlight-color);
+}

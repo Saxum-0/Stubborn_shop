@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Back-Office - Stubborn{% endblock %}
+
+{% block body %}
+<div class="container py-4 text-white" style="background-color: #121212;">
+
+    <!-- Barre de navigation -->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="fw-bold">Stubborn</h2>
+            <small>Slogan</small>
+        </div>
+        <h1>Back-Office</h1>
+        <div>
+            <a href="{{ path('home') }}" class="text-white me-3">Boutique</a>
+            <a href="{{ path('app_logout') }}" class="text-white">Se déconnecter</a>
+        </div>
+    </div>
+
+    <!-- Formulaire d'ajout -->
+    <div class="p-4 rounded" style="background-color: #5c2b2b;">
+        <h3 class="text-white mb-3">Ajouter un sweat-shirt</h3>
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-3">{{ form_row(form.name) }}</div>
+                <div class="col-md-3">{{ form_row(form.price) }}</div>
+                <div class="col-md-3">{{ form_row(form.image) }}</div>
+                <div class="col-md-3">{{ form_row(form.highlighted) }}</div>
+            </div>
+
+            <h5 class="mt-4">Stock par taille</h5>
+            <div class="row">
+                {% for stockForm in form.stocks %}
+                    <div class="col-md-2">
+                        {{ form_row(stockForm.size) }}
+                        {{ form_row(stockForm.quantity) }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button class="btn btn-light mt-3">Ajouter</button>
+        {{ form_end(form) }}
+    </div>
+
+    <!-- Liste des produits -->
+    <div class="mt-5">
+        {% for product in products %}
+            <div class="bg-dark p-3 rounded mb-4 d-flex justify-content-between align-items-center flex-wrap">
+                <img src="{{ asset(product.image) }}" alt="Image produit" style="width: 100px; height: auto;" class="me-4">
+
+                <div style="min-width: 150px;"><strong>{{ product.name }}</strong></div>
+                <div style="min-width: 100px;">{{ product.price }} €</div>
+
+                <div class="d-flex flex-column me-4">
+                    {% for stock in product.stocks %}
+                        <span>{{ stock.size }} : {{ stock.quantity }}</span>
+                    {% endfor %}
+                </div>
+
+                <div style="min-width: 100px;">
+                    {% if product.highlighted %}
+                        <span class="badge bg-success">En avant</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Normal</span>
+                    {% endif %}
+                </div>
+
+                <div class="d-flex gap-2 mt-3 mt-md-0">
+                    <a href="{{ path('admin_product_edit', {id: product.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    <a href="{{ path('admin_product_delete', { id: product.id }) }}"
+                    class="btn btn-sm btn-danger"
+                    onclick="return confirm('Supprimer ce produit ?');">Supprimer</a>
+
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun produit trouvé.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pied de page -->
+    <footer class="mt-5 pt-4 border-top text-muted">
+        <p>Informations de la société</p>
+    </footer>
+</div>
+{% endblock %}

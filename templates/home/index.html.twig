@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 style="color:#888 ;">Bienvenue chez Stubborn</h1>
+        <p class="lead" style="color: #C62828;">Don't compromise on your look</p>
+    </div>
+    <h2 class="text-center mb-4" style="color: #888;">Sweat-shirts mis en avant</h2>
+    <div class="row">
+        {% for product in highlighted %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ asset(product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.price|number_format(2, ',', ' ') }} €</p>
+                        {% if app.user %}
+                            <a href="{{ path('product_show', { slug: product.slug }) }}" class="btn btn-sm text-white" style="background-color: #C65E5E;">Voir</a>
+                        {% else %}
+                            <p class="text-muted">Connectez-vous pour voir le produit</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-center">Aucun produit mis en avant actuellement.</p>
+        {% endfor %}
+    </div>
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h4 class="card-title" style="color: #c62828;">Informations de la société</h4>
+                    <p><strong>Nom :</strong> Stubborn</p>
+                    <p><strong>Adresse :</strong> Piccadilly Circus, London W1J 0DA, Royaume-Uni</p>
+                    <p><strong>Contact :</strong> <a href="mailto:stubborn@blabla.com">stubborn@blabla.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

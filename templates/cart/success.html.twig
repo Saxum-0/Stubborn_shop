@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement réussi - Stubborn{% endblock %}
+
+{% block body %}
+<div class="text-center mt-5">
+    <h1 class="text-success">✅ Paiement réussi !</h1>
+    <p class="mt-3">Merci pour votre commande 🙏</p>
+    <a href="{{ path('product_index') }}" class="btn btn-outline-dark mt-4">Retour à la boutique</a>
+</div>
+{% endblock %}
