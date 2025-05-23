@@ -92,7 +92,7 @@ public function checkout(
                 'product_data' => [
                     'name' => $item->getProduct()->getName() . ' (' . $item->getSize() . ')',
                 ],
-                'unit_amount' => $item->getProduct()->getPrice() * 100, // en centimes
+                'unit_amount' => $item->getProduct()->getPrice() * 100,
             ],
             'quantity' => $item->getQuantity(),
         ];
@@ -109,7 +109,6 @@ public function checkout(
 #[Route('/success', name: 'cart_success')]
 public function success(CartItemRepository $cartItemRepository, EntityManagerInterface $em): Response
 {
-    // Optionnel : vider le panier après paiement réussi
     $items = $cartItemRepository->findAll();
     foreach ($items as $item) {
         $em->remove($item);

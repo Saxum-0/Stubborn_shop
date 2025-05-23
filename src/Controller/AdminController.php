@@ -35,7 +35,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $product->setCreatedAt(new \DateTimeImmutable());
 
-            // Bien s'assurer que les stocks sont liés
+            
             foreach ($product->getStocks() as $stock) {
                 $stock->setProduct($product);
             }

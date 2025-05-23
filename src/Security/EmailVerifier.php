@@ -42,14 +42,12 @@ class EmailVerifier
      */
     public function handleEmailConfirmation(Request $request, User $user): void
     {
-        // Vérifie le lien signé
         $this->verifyEmailHelper->validateEmailConfirmation(
             $request->getUri(),
             $user->getId(),
             $user->getEmail()
         );
 
-        // Marque l'utilisateur comme vérifié
         $user->setIsVerified(true);
 
         $this->entityManager->persist($user);

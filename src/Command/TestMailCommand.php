@@ -21,7 +21,7 @@ class TestMailCommand extends Command
     {
         $email = (new Email())
             ->from('test@stubborn-shop.com')
-            ->to('whatever@domain.fake') // n'importe quoi ici, Mailtrap le reçoit
+            ->to('whatever@domain.fake')
             ->subject('🚀 Test Mailtrap')
             ->text('Si tu vois ce message dans Mailtrap, tout fonctionne !');
 
